@@ -8,14 +8,12 @@ const api = axios.create({
   headers: { 'Content-Type': 'application/json' },
 })
 
-// Request interceptor — attach auth token if present
 api.interceptors.request.use(config => {
   const token = localStorage.getItem('token')
   if (token) config.headers.Authorization = `Bearer ${token}`
   return config
 })
 
-// Response interceptor — handle 401
 api.interceptors.response.use(
   res => res,
   err => {
@@ -28,12 +26,31 @@ api.interceptors.response.use(
 )
 
 export const studentAPI = {
-  getAll:    (params = {}) => api.get('/students', { params }),
-  getById:   (id)          => api.get(`/students/${id}`),
-  create:    (data)        => api.post('/students', data),
-  update:    (id, data)    => api.put(`/students/${id}`, data),
-  delete:    (id)          => api.delete(`/students/${id}`),
-  search:    (q)           => api.get('/students/search', { params: { q } }),
+  getAll:       (params = {}) => api.get('/students', { params }),
+  getById:      (id)          => api.get(`/students/${id}`),
+  create:       (data)        => api.post('/students', data),
+  update:       (id, data)    => api.put(`/students/${id}`, data),
+  delete:       (id)          => api.delete(`/students/${id}`),
+  addPayment:   (id, payment) => api.post(`/students/${id}/payments`, payment),
+  deletePayment:(id, payId)   => api.delete(`/students/${id}/payments/${payId}`),
+}
+
+/**
+ * Payment helpers — work entirely on the student object (no extra API call needed)
+ *
+ * Student shape expected from API:
+ * {
+ *   _id, name, phone, email, status, admissionDate, dueDate,
+ *   monthlyFee: Number,               // fixed monthly fee
+ *   payments: [{ _id, amount, date, note }]  // list of all payments made
+ * }
+ */
+export function totalPaid(student) {
+  return (student.payments || []).reduce((sum, p) => sum + (p.amount || 0), 0)
+}
+
+export function totalDue(student) {
+  return Math.max(0, (student.monthlyFee || student.fee || 0) - totalPaid(student))
 }
 
 export default api

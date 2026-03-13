@@ -7,7 +7,7 @@ import {
 
 const PROFILE = {
   name: 'Library Admin',
-  email: 'admin@libraryos.com',
+  email: 'admin@libraryjunction.com',
   phone: '9800000001',
   location: 'Jaipur, Rajasthan',
   libraryName: 'City Central Library',
@@ -168,7 +168,7 @@ export default function OwnerProfile() {
       </div>
 
       <p style={{ textAlign: 'center', fontSize: 11, color: 'var(--text-faint)', paddingBottom: 4 }}>
-        Member since {PROFILE.memberSince} · LibraryOS v2.0
+        Member since {PROFILE.memberSince} · Library Junction v2.0
       </p>
 
     </div>
