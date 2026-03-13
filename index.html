@@ -1,11 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <link href="/src/index.css" rel="stylesheet">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>library-frontend</title>
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+
+    <!-- Disable zoom on mobile, fix viewport -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+
+    <!-- Prevent iOS tap highlight -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+    <title>LibraryOS</title>
+
+    <style>
+      /* Prevent pull-to-refresh & overscroll on iOS */
+      html, body {
+        overscroll-behavior: none;
+        -webkit-overflow-scrolling: touch;
+        touch-action: pan-x pan-y;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

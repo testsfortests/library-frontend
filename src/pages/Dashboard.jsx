@@ -138,16 +138,17 @@ export default function Dashboard() {
       {/* ── Stats Grid ── */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: 12,
+        gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+        gap: 10,
+        width: '100%',
       }}>
         {[
-          { title: 'Total Students', value: stats.totalStudents, subtitle: 'Registered', icon: Users,       color: 'navy',  trendLabel: '+12 this month' },
-          { title: 'Active Members', value: stats.activeStudents, subtitle: 'Enrolled',   icon: UserCheck,  color: 'green', trendLabel: '97% retention' },
-          { title: 'Fees Collected', value: fmt(stats.totalFees),  subtitle: 'Revenue',    icon: IndianRupee,color: 'amber', trendLabel: '+8% vs last month' },
-          { title: 'Pending Fees',   value: fmt(stats.pendingFees),subtitle: 'Overdue',    icon: AlertCircle,color: 'red',   trendLabel: '4 overdue' },
+          { title: 'Total Students', value: stats.totalStudents, icon: Users,        color: 'navy',  trendLabel: '+12 this month' },
+          { title: 'Active Members', value: stats.activeStudents, icon: UserCheck,   color: 'green', trendLabel: '97% retention' },
+          { title: 'Fees Collected', value: fmt(stats.totalFees),  icon: IndianRupee, color: 'amber', trendLabel: '+8% vs last' },
+          { title: 'Pending Fees',   value: fmt(stats.pendingFees), icon: AlertCircle, color: 'red',   trendLabel: '4 overdue' },
         ].map((card, i) => (
-          <div key={i} style={{ animationDelay: `${i * 0.06}s` }}>
+          <div key={i} style={{ animationDelay: `${i * 0.06}s`, minWidth: 0 }}>
             <StudentCard {...card} trend={card.color === 'red' ? 'down' : 'up'} />
           </div>
         ))}

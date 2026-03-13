@@ -4,7 +4,7 @@ import { TrendingUp, TrendingDown, Minus } from 'lucide-react'
 const themes = {
   navy: {
     bg: 'linear-gradient(135deg, var(--navy3), var(--navy))',
-    iconBg: 'rgba(255,255,255,0.12)',
+    iconBg: 'rgba(255,255,255,0.13)',
     iconColor: '#fff',
     textColor: '#fff',
     subColor: 'rgba(255,255,255,0.60)',
@@ -13,7 +13,7 @@ const themes = {
   },
   amber: {
     bg: 'linear-gradient(135deg, #F59E0B, #D97706)',
-    iconBg: 'rgba(255,255,255,0.20)',
+    iconBg: 'rgba(255,255,255,0.22)',
     iconColor: 'var(--navy)',
     textColor: 'var(--navy)',
     subColor: 'rgba(15,30,53,0.55)',
@@ -22,7 +22,7 @@ const themes = {
   },
   green: {
     bg: 'linear-gradient(135deg, #059669, #047857)',
-    iconBg: 'rgba(255,255,255,0.12)',
+    iconBg: 'rgba(255,255,255,0.13)',
     iconColor: '#fff',
     textColor: '#fff',
     subColor: 'rgba(255,255,255,0.60)',
@@ -56,62 +56,81 @@ export default function StudentCard({ title, value, subtitle, icon: Icon, color 
   return (
     <div style={{
       background: t.bg,
-      borderRadius: 'var(--radius-lg)',
-      padding: '22px 20px',
+      borderRadius: 'var(--radius)',
+      padding: '14px 12px',
       border: t.dark ? 'none' : '1px solid var(--border)',
-      boxShadow: t.dark ? 'var(--shadow-lg)' : 'var(--shadow-sm)',
-      position: 'relative', overflow: 'hidden',
+      boxShadow: t.dark ? 'var(--shadow)' : 'var(--shadow-sm)',
+      position: 'relative',
+      overflow: 'hidden',
       animation: 'fadeUp 0.3s ease both',
+      minWidth: 0,
+      width: '100%',
+      boxSizing: 'border-box',
     }}>
-      {/* Decorative circle */}
+      {/* Decorative bg circle */}
       <div style={{
-        position: 'absolute', right: -20, top: -20,
-        width: 100, height: 100, borderRadius: '50%',
-        background: 'rgba(255,255,255,0.05)',
-        pointerEvents: 'none',
-      }} />
-      <div style={{
-        position: 'absolute', right: 10, bottom: -30,
-        width: 80, height: 80, borderRadius: '50%',
-        background: 'rgba(255,255,255,0.04)',
+        position: 'absolute', right: -14, top: -14,
+        width: 64, height: 64, borderRadius: '50%',
+        background: 'rgba(255,255,255,0.06)',
         pointerEvents: 'none',
       }} />
 
-      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', position: 'relative' }}>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontSize: 11, fontWeight: 600, color: t.subColor, textTransform: 'uppercase', letterSpacing: '0.4px', marginBottom: 8 }}>
-            {title}
-          </p>
-          <p style={{
-            fontFamily: 'var(--font-display)',
-            fontSize: 30, fontWeight: 700,
-            color: t.textColor, lineHeight: 1,
-            letterSpacing: '-0.5px',
-          }}>{value}</p>
-          {subtitle && (
-            <p style={{ fontSize: 12, color: t.subColor, marginTop: 5 }}>{subtitle}</p>
-          )}
-          {trendLabel && (
-            <div style={{
-              display: 'flex', alignItems: 'center', gap: 4,
-              marginTop: 10, fontSize: 11, fontWeight: 600,
-              color: t.trendColor,
-            }}>
-              <TrendIcon size={11} />
-              <span>{trendLabel}</span>
-            </div>
-          )}
-        </div>
-
-        <div style={{
-          width: 44, height: 44, borderRadius: 14,
-          background: t.iconBg,
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          flexShrink: 0, marginLeft: 12,
-        }}>
-          <Icon size={20} color={t.iconColor} strokeWidth={2} />
-        </div>
+      {/* Icon */}
+      <div style={{
+        width: 32, height: 32, borderRadius: 9,
+        background: t.iconBg,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        marginBottom: 10, flexShrink: 0,
+      }}>
+        <Icon size={15} color={t.iconColor} strokeWidth={2} />
       </div>
+
+      {/* Label */}
+      <p style={{
+        fontSize: 10, fontWeight: 600,
+        color: t.subColor,
+        textTransform: 'uppercase',
+        letterSpacing: '0.35px',
+        marginBottom: 3,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }}>
+        {title}
+      </p>
+
+      {/* Value */}
+      <p style={{
+        fontFamily: 'var(--font-display)',
+        fontSize: 20,
+        fontWeight: 700,
+        color: t.textColor,
+        lineHeight: 1.1,
+        letterSpacing: '-0.2px',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }}>
+        {value}
+      </p>
+
+      {/* Trend label */}
+      {trendLabel && (
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: 3,
+          marginTop: 6, fontSize: 10, fontWeight: 600,
+          color: t.trendColor,
+        }}>
+          <TrendIcon size={10} />
+          <span style={{
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+          }}>
+            {trendLabel}
+          </span>
+        </div>
+      )}
     </div>
   )
 }
